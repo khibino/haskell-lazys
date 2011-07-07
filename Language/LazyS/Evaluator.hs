@@ -4,6 +4,7 @@ module Language.LazyS.Evaluator where
 import Data.List (find)
 import Language.LazyS.PrimNum (PNum)
 import qualified Language.LazyS.Syntax as Syntax
+import Debug.Trace (trace)
 
 mainNotFound :: a
 mainNotFound =  error "main definition not found."
@@ -207,6 +208,7 @@ evalExp' env = eval
   where eval (Syntax.Lit lit)  = Value $ Lit $ evalLit lit
         eval (Syntax.EVar var) =
           maybe (unboundVariable var) bindValue
+          -- $ find ((var ==) . (\k -> trace (var ++ " == " ++ k) k) . bindKey) env
           $ find ((var ==) . bindKey) env
         eval (Syntax.FApp fun args) =
           apply (eval fun) (map eval args)
@@ -223,4 +225,4 @@ qualifiedImport env mod' =
   snd $ topEnv (Syntax.name mod') env (Syntax.binds mod')
 
 run :: Env PNum -> Syntax.Module' PNum -> Result PNum
-run env mod' =  evalExp' (primitives ++ qualifiedImport env mod') (Syntax.EVar "Main.main")
+run env mod' =  evalExp' (qualifiedImport (primitives ++ env) mod') (Syntax.EVar "Main.main")
