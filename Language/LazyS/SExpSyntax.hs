@@ -1,4 +1,5 @@
-module SExpSyntax (
+
+module Language.LazyS.SExpSyntax (
   Atom(..), SExp'(..), SExp,
   fromList,
   fromList1,
@@ -14,8 +15,8 @@ module SExpSyntax (
   toList, toList1) where
 
 import Control.Arrow (first)
-import ParseResult (ParseResult)
-import PrimNum(PNum, fromDouble)
+import Language.LazyS.ParseResult (ParseResult)
+import Language.LazyS.PrimNum(PNum, fromDouble)
 
 data Atom n = Num n
             | Str String

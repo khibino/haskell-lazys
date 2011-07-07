@@ -1,19 +1,18 @@
-module Parser (
+
+module Language.LazyS.Parser (
   parseExpr,
   parseModule
   ) where
 
 import Control.Applicative ((<$>), (<*>))
 
-import ParseResult (ParseResult, (<|>), errorResult, successResult)
-import SExpSyntax (SExp'((:!)), SExp)
-import qualified SExpSyntax as SExp
+import Language.LazyS.ParseResult (ParseResult, (<|>), errorResult, successResult)
+import Language.LazyS.SExpSyntax (SExp'((:!)), SExp)
+import qualified Language.LazyS.SExpSyntax as SExp
 
-import Syntax (Var, Pat(..), lambda, number, string, quote,
-               Lambda,
-               Exp, Exp'(..),
-               Bind, Bind'(..),
-               Module, Module'(..))
+import Language.LazyS.Syntax (Var, Pat(..), lambda, number, string, quote,
+                              Lambda, Exp, Bind, Module)
+import qualified Language.LazyS.Syntax as Syntax
 
 parseError :: String -> SExp -> ParseResult exp
 parseError formKind = errorResult . (("Ill-formed " ++ formKind ++ "!: ") ++) . show
@@ -72,8 +71,8 @@ parseBind =  dispatch
         dispatch  form = parseError "bind" form
 
 parseModule :: [SExp] -> ParseResult Module
-parseModule ees@(e:es) = Module <$> modDecl e <*> topBinds es <|>
-                       Module "Main" <$> topBinds ees
+parseModule ees@(e:es) = Syntax.Module <$> modDecl e <*> topBinds es <|>
+                         Syntax.Module "Main" <$> topBinds ees
   where modDecl (SExp.Atom (SExp.Id "module")
                  :! SExp.Atom (SExp.Id name') :! SExp.Nil) =
           successResult name'

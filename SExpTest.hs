@@ -3,9 +3,9 @@ module SExpTest (
   test0, test1, test2
   ) where
 
-import ParseResult (ParseResult)
-import SExpSyntax (SExp)
-import SExpParser (parseExpr)
+import Language.LazyS.ParseResult (ParseResult)
+import Language.LazyS.SExpSyntax (SExp)
+import Language.LazyS.SExpParser (parseExpr)
 
 --parseE = parseExpr
 

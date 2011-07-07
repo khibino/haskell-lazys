@@ -1,5 +1,5 @@
 
-module SExpParser (
+module Language.LazyS.SExpParser (
   parseFloat,
   parseAtom,
   parseExpr,
@@ -7,9 +7,9 @@ module SExpParser (
   ) where
 
 import Prelude hiding (concat)
-import ParseResult (ParseResult, successResult, errorResult)
-import SExpSyntax (SExp)
-import qualified SExpSyntax as Syntax
+import Language.LazyS.ParseResult (ParseResult, successResult, errorResult)
+import Language.LazyS.SExpSyntax (SExp)
+import qualified Language.LazyS.SExpSyntax as Syntax
 
 import Data.Char (toUpper, isSpace)
 import Text.ParserCombinators.ReadP

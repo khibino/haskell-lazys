@@ -1,4 +1,5 @@
-module PrimNum (
+
+module Language.LazyS.PrimNum (
   PNum,
   fromDouble) where
 

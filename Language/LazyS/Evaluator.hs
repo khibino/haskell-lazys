@@ -1,9 +1,9 @@
 
-module Evaluator where
+module Language.LazyS.Evaluator where
 
 import Data.List (find)
-import PrimNum (PNum)
-import qualified Syntax
+import Language.LazyS.PrimNum (PNum)
+import qualified Language.LazyS.Syntax as Syntax
 
 mainNotFound :: a
 mainNotFound =  error "main definition not found."

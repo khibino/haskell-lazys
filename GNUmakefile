@@ -6,13 +6,13 @@ HC = ghc
 HFLAGS = -Wall
 
 sources = \
-	PrimNum.hs \
-	ParseResult.hs \
-	SExpSyntax.hs \
-	SExpParser.hs \
-	Syntax.hs \
-	Parser.hs \
-	Evaluator.hs \
+	Language/LazyS/PrimNum.hs \
+	Language/LazyS/ParseResult.hs \
+	Language/LazyS/SExpSyntax.hs \
+	Language/LazyS/SExpParser.hs \
+	Language/LazyS/Syntax.hs \
+	Language/LazyS/Parser.hs \
+	Language/LazyS/Evaluator.hs \
 
 
 tests = \
@@ -24,6 +24,7 @@ all_sources = $(sources) $(tests)
 
 targets = $(all_sources:.hs=.o)
 
+interfaces = $(all_sources:.hs=.hi)
 
 %.o: %.hs
 	$(HC) $(HFLAGS) -c $< -o $@
@@ -40,6 +41,4 @@ push: rebuild
 	hg push
 
 clean:
-	$(RM) *.o
-	$(RM) *.hi
-	$(RM) *.hs~
+	$(RM) $(targets) $(interfaces)

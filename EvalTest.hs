@@ -2,14 +2,14 @@ module EvalTest where
 
 import Control.Applicative ((<$>))
 
-import PrimNum (PNum)
-import ParseResult (ParseResult)
-import qualified SExpParser as SExp (parseExpr)
-import Syntax (Literal'(..), Pat(..),
-               Exp, Exp'(..), Bind'(..),
-               Module, Module'(..))
-import Parser (parseExpr)
-import Evaluator (evalExp, Result, run)
+import Language.LazyS.PrimNum (PNum)
+import Language.LazyS.ParseResult (ParseResult)
+import qualified Language.LazyS.SExpParser as SExp (parseExpr)
+import Language.LazyS.Syntax (Literal'(..), Pat(..),
+                              Exp, Exp'(..), Bind'(..),
+                              Module, Module'(..))
+import Language.LazyS.Parser (parseExpr)
+import Language.LazyS.Evaluator (evalExp, Result, run)
 
 exp0 :: Exp
 exp0 =  Let [BPat (PVar "x") (Lit (Num 1))] (EVar "x")

@@ -1,4 +1,5 @@
-module ParseResult (
+
+module Language.LazyS.ParseResult (
   ParseResult,
   (<|>),
   errorResult,

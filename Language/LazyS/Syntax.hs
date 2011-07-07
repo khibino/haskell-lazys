@@ -1,5 +1,5 @@
 
-module Syntax (
+module Language.LazyS.Syntax (
   Var, Mod,
   
   Pat(..), 
@@ -14,8 +14,8 @@ module Syntax (
   --Program(..), simpleProgram
   ) where
 
-import PrimNum (PNum)
-import SExpSyntax (SExp)
+import Language.LazyS.PrimNum (PNum)
+import Language.LazyS.SExpSyntax (SExp)
 
 type Var = String
 type Mod = String
