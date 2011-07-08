@@ -68,11 +68,8 @@ satisfy_ =  (*> toReadP ()) . satisfy
 char_ :: Char -> ReadP ()
 char_ =  (*> toReadP ()) . char
 
-semi :: ReadP Char
-semi =  char ';'
-
 comment :: ReadP ()
-comment =  semi *> skipMany (satisfy (/= '\n')) *> char_ '\n' 
+comment =  char ';' *> skipMany (satisfy (/= '\n')) *> char_ '\n'
 
 blank :: ReadP ()
 blank =  satisfy_ isSpace +++ comment
