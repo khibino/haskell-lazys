@@ -9,7 +9,7 @@ import Language.LazyS.Evaluator (Result)
 import qualified Language.LazyS.Evaluator as Eval
 
 run :: String -> ParseResult (Result PNum)
-run sexpr = Eval.run [] <$>
+run sexpr = Eval.single [] <$>
             (SExp.parseExprList sexpr
              >>= parseModule)
 

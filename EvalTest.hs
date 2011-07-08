@@ -9,7 +9,7 @@ import Language.LazyS.Syntax (Literal'(..), Pat(..),
                               Exp, Exp'(..), Bind'(..),
                               Module, Module'(..))
 import Language.LazyS.Parser (parseExpr)
-import Language.LazyS.Evaluator (evalExp, Result, run)
+import Language.LazyS.Evaluator (evalExp, Result, single)
 
 exp0 :: Exp
 exp0 =  Let [BPat (PVar "x") (Lit (Num 1))] (EVar "x")
@@ -23,7 +23,7 @@ mod1 =  Module "Main" [BPat
                        (Let [BPat (PVar "x") (Lit (Num 1))] (EVar "x"))]
 
 test1 :: Result PNum
-test1 =  run [] mod1
+test1 =  single [] mod1
 
 
 runTest :: String -> ParseResult (Result PNum)

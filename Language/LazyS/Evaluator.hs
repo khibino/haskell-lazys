@@ -1,13 +1,15 @@
 
-module Language.LazyS.Evaluator where
+module Language.LazyS.Evaluator (
+  Result,
+  evalExp, single, run) where
 
 import Data.List (find)
 import Language.LazyS.PrimNum (PNum)
 import qualified Language.LazyS.Syntax as Syntax
-import Debug.Trace (trace)
+--import Debug.Trace (trace)
 
-mainNotFound :: a
-mainNotFound =  error "main definition not found."
+--mainNotFound :: a
+--mainNotFound =  error "main definition not found."
 
 type Var = String
 type Mod = String
@@ -224,5 +226,8 @@ qualifiedImport :: Env n -> Syntax.Module' n -> Env n
 qualifiedImport env mod' =
   snd $ topEnv (Syntax.name mod') env (Syntax.binds mod')
 
-run :: Env PNum -> Syntax.Module' PNum -> Result PNum
-run env mod' =  evalExp' (qualifiedImport (primitives ++ env) mod') (Syntax.EVar "Main.main")
+run :: Env PNum -> [Syntax.Module' PNum] -> Result PNum
+run env mods = evalExp' (foldr (flip qualifiedImport) env mods) (Syntax.EVar "Main.main")
+
+single :: Env PNum -> Syntax.Module' PNum -> Result PNum
+single env mod' = run env [mod']
