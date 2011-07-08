@@ -18,8 +18,8 @@ sources = \
 tests = \
 	SExpTest.hs \
 	EvalTest.hs \
-	simple.hs \
-	run.hs
+	expr.hs \
+	single.hs
 
 all_sources = $(sources) $(tests)
 
